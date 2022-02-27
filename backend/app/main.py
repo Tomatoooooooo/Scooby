@@ -4,6 +4,7 @@ import string
 from tokenize import String
 import uvicorn
 import pickle
+import os
 
 from pydantic import BaseModel
 from fastapi import FastAPI
@@ -19,6 +20,7 @@ origins = [
     "https://localhost.tiangolo.com",
     "http://localhost",
     "http://localhost:8080",
+    "http://localhost:8000",
     "http://localhost:3000",
 ]
 
@@ -32,8 +34,8 @@ app.add_middleware(
 
 # model
 
-model = pickle.load(open('./model/fakenewsmodel.pkl', 'rb'))
-cv = pickle.load(open("./model/vectorizer.pickle", 'rb')) 
+model = pickle.load(open('./app/models/fakenewsmodel.pkl', 'rb'))
+cv = pickle.load(open("./app/models/vectorizer.pickle", 'rb')) 
 
 
 class Headline(BaseModel):
@@ -59,4 +61,4 @@ async def get_predict(data: Headline):
     }
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8080, host='0.0.0.0')
+    uvicorn.run(app, root_path= '/api', proxy_headers=True,  port=8080, host='0.0.0.0')
