@@ -26,14 +26,14 @@ function App() {
   const [input, setInput] = useState(null);
   const [output, setOutput] = useState(null);
 
-  const handleInputChange = (e) => (setInput(e.target.value).setOutput(null));
+  const handleInputChange = (e) => (setInput(e.target.value), setOutput(null));
   const handleSubmit = (e) => {
     e.preventDefault();
     const title = input;
     const params = { title };
 
     axios
-      .post("/api/prediction", params)
+      .post("http://localhost:8080/prediction", params)
       .then((res) => {
         setOutput(null);
         const data = res.data.data;

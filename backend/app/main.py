@@ -34,8 +34,8 @@ app.add_middleware(
 
 # model
 
-model = pickle.load(open('./app/models/fakenewsmodel.pkl', 'rb'))
-cv = pickle.load(open("./app/models/vectorizer.pickle", 'rb')) 
+model = pickle.load(open('./models/fakenewsmodel.pkl', 'rb'))
+cv = pickle.load(open("./models/vectorizer.pickle", 'rb')) 
 
 
 class Headline(BaseModel):
@@ -61,4 +61,4 @@ async def get_predict(data: Headline):
     }
 
 if __name__ == "__main__":
-    uvicorn.run(app, root_path= '/api', proxy_headers=True,  port=8080, host='0.0.0.0')
+    uvicorn.run(app, port=8080, host='0.0.0.0')
