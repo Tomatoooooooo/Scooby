@@ -23,3 +23,8 @@ code {
   color: #2D3748 !important;
   opacity: 1; /* Firefox */
 }
+
+.icons{
+  display: inline !important;
+  transform: translateY(10px);
+}
